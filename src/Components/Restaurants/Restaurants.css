@@ -1,14 +1,3 @@
-.restaurants-list {
-  display: flex; 
-  align-items: center;
-  /* justify-content: space-between; */
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  padding-bottom: 50px;
-}
-
 .card-item {
   width: 250px;
   border-radius: 5px;
