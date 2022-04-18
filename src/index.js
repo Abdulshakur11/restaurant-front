@@ -10,8 +10,8 @@ const client = new ApolloClient({
 	uri: "https://lastexam-backend.herokuapp.com/graphql",
 	cache: new InMemoryCache(),
 });
-
-ReactDOM.render(
+ 
+ReactDOM.render( 
 	<React.StrictMode>
 		<BrowserRouter>
 			<ApolloProvider client={client}>
