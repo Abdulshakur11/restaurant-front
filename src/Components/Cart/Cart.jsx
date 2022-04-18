@@ -7,7 +7,7 @@ import { ORDERS } from "../../Query";
 import cart from "../../images/cart-outline.svg";
 import deleteIcon from "../../images/trash-outline.svg";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Context } from "../../Context/Context";
 import { Button, Offcanvas } from "react-bootstrap";
 
@@ -17,6 +17,9 @@ function Cart() {
   const [test, setTest] = useState();
   const [show, setShow] = useState(false);
   const { items, setItems } = useContext(Context);
+  const usernameRef = useRef();
+  const locationRef = useRef();
+  const phone_numberRef = useRef();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -55,12 +58,11 @@ function Cart() {
   });
 
   const handleSubmit = (e) => {
-    const { username, location, phone_number } = e.target.elements;
     newOrder({
       variables: {
-        username: username.value,
-        location: location.value,
-        phone_number: phone_number.value,
+        username: usernameRef.current.value,
+        location: locationRef.current.value,
+        phone_number: phone_numberRef.current.value,
         food_name: food?.food,
         food_price: price.innerHTML - 0, // malumotni jo'natayotganimizda input'dan String holtda ketadi agar - 0 qilsak u Number type'da ketadi 
         food_count: productQuantity.innerHTML - 0
@@ -122,11 +124,11 @@ function Cart() {
                 <div>
                   <h5>{food?.food}</h5>
                   <label className="label" htmlFor="name">Name</label>
-                  <input className="form-control name" name="username" type="text" id="name" placeholder="Name" required />
+                  <input ref={usernameRef} className="form-control name" name="username" type="text" id="name" placeholder="Name" required />
                   <label className="label" htmlFor="location">Location</label>
-                  <input className="form-control" name="location" type="text" id="location" placeholder="Location" required />
+                  <input ref={locationRef} className="form-control" name="location" type="text" id="location" placeholder="Location" required />
                   <label className="label" htmlFor="phone_number">Phone number</label>
-                  <input className="form-control" name="phone_number" type="text" id="phone_number" placeholder="Phone number" required />
+                  <input ref={phone_numberRef} className="form-control" name="phone_number" type="text" id="phone_number" placeholder="Phone number" required />
 
                   <div className="quantity-wrapper">
                     <p className="quantity-title">Quantity:</p>
