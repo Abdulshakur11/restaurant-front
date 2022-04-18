@@ -1,7 +1,5 @@
 import "./Cart.css";
-
 import { useMutation } from "@apollo/client";
-
 import { ORDERS } from "../../Query";
 
 import cart from "../../images/cart-outline.svg";
@@ -17,10 +15,11 @@ function Cart() {
   const [test, setTest] = useState();
   const [show, setShow] = useState(false);
   const { items, setItems } = useContext(Context);
+  // ========================
   const usernameRef = useRef();
   const locationRef = useRef();
   const phone_numberRef = useRef();
-
+  // ========================
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -50,7 +49,7 @@ function Cart() {
       price.innerHTML = parseInt(price.innerHTML) - food?.price;
     }
   };
-
+  
   const [newOrder] = useMutation(ORDERS, {
     update: (cache, data) => {
       console.log(data);
@@ -75,8 +74,6 @@ function Cart() {
     setItems(items.filter((item) => item.id !== id))
     localStorage.setItem("item", JSON.stringify(items));
   };
-
-
 
   return (
     <>
@@ -124,11 +121,11 @@ function Cart() {
                 <div>
                   <h5>{food?.food}</h5>
                   <label className="label" htmlFor="name">Name</label>
-                  <input ref={usernameRef} className="form-control name" name="username" type="text" id="name" placeholder="Name" required />
+                  <input ref={usernameRef} className="form-control name" type="text" id="name" placeholder="Name" required />
                   <label className="label" htmlFor="location">Location</label>
-                  <input ref={locationRef} className="form-control" name="location" type="text" id="location" placeholder="Location" required />
+                  <input ref={locationRef} className="form-control" type="text" id="location" placeholder="Location" required />
                   <label className="label" htmlFor="phone_number">Phone number</label>
-                  <input ref={phone_numberRef} className="form-control" name="phone_number" type="text" id="phone_number" placeholder="Phone number" required />
+                  <input ref={phone_numberRef} className="form-control" type="text" id="phone_number" placeholder="Phone number" required />
 
                   <div className="quantity-wrapper">
                     <p className="quantity-title">Quantity:</p>
